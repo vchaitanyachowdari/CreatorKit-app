@@ -1,4 +1,4 @@
-# CreatorKit - All-in-One Content Creation Platform
+# CreatorKit - All in One Content Creation Platform
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com)
 [![Built with Next.js](https://img.shields.io/badge/Built%20with-Next.js-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
@@ -7,13 +7,13 @@
 
 ## Overview
 
-**CreatorKit** is a comprehensive AI-powered platform designed for content creators, marketing professionals, and developers. It provides 11+ tools to generate, analyze, and optimize content across every medium—from social media posts to code debugging.
+**CreatorKit** is a comprehensive AI powered platform designed for content creators, marketing professionals, and developers. It provides 11+ tools to generate, analyze, and optimize content across every medium from social media posts to code debugging.
 
 ### Key Features
 
-- **11+ AI-Powered Tools** for content creation and analysis
-- **Real-time Generation** with streaming support
-- **Production-Ready** with comprehensive error handling
+- **11+ AI Powered Tools** for content creation and analysis
+- **Real time Generation** with streaming support
+- **Production Ready** with comprehensive error handling
 - **Dark Theme Interface** with modern, responsive design
 - **Free Tier Access** with optional premium plans
 - **Secure Authentication** with login/signup system
@@ -24,20 +24,20 @@
 ## Tools
 
 ### Content Generation
-- **Social Media Post Generator** - Create platform-specific posts (Twitter, LinkedIn, Instagram, Facebook, TikTok) with optimal hashtags and tone variations
-- **Blog Post Writer** - Generate SEO-optimized long-form content with readability scores and keyword analysis
+- **Social Media Post Generator** - Create platform specific posts (Twitter, LinkedIn, Instagram, Facebook, TikTok) with optimal hashtags and tone variations
+- **Blog Post Writer** - Generate SEO optimized long form content with readability scores and keyword analysis
 - **Press Release Generator** - Professional PR content formatted in AP Style
 - **Script Writer** - Generate video, podcast, presentation, commercial, and tutorial scripts with delivery tips
 
 ### Analysis & Insights
 - **PDF Analyzer** - Extract summaries, key points, and metadata from documents
-- **Data Insights Engine** - Analyze CSV/JSON data with AI-generated statistics, trends, and recommendations
+- **Data Insights Engine** - Analyze CSV/JSON data with AI generated statistics, trends, and recommendations
 - **Code Debugger** - Identify errors, security issues, and optimization suggestions
 
 ### Business & Development
 - **SWOT Analysis Generator** - Create strategic business analysis with recommendations
 - **Translation Suite** - Supports 12+ languages with tone preservation (formal, casual, professional, friendly)
-- **Regex Builder** - Generate regex patterns with real-time testing and explanations
+- **Regex Builder** - Generate regex patterns with real time testing and explanations
 - **Chart Generator** - Create beautiful charts from CSV data with multiple visualization options
 
 ---
@@ -177,8 +177,8 @@ curl -X POST http://localhost:3000/api/tools/social-media-generator \
 - **Next.js 14** - React framework with App Router
 - **React 19** - UI library
 - **TypeScript** - Type safety
-- **Tailwind CSS** - Utility-first styling
-- **Shadcn/UI** - High-quality component library
+- **Tailwind CSS** - Utility first styling
+- **Shadcn/UI** - High quality component library
 - **Framer Motion** - Animations
 
 ### Backend
@@ -459,7 +459,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 - **Documentation**: Check the [README](README.md) and inline code comments
 - **Issues**: Report bugs on [GitHub Issues](https://github.com/yourusername/CreatorKit-app/issues)
-- **Email**: support@creatorkit.com (when available)
+- **Email**: vchaitanya@chowdari.in 
 - **Community**: Join our Discord community (link when available)
 
 ---
@@ -486,10 +486,10 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ## Changelog
 
 ### Version 0.1.0 (Initial Release)
-- 11+ AI-powered tools
+- 11+ AI powered tools
 - Authentication system
 - Dark theme UI
-- Production-ready deployment
+- Production ready deployment
 
 ---
 
@@ -505,10 +505,10 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ## Contact
 
-- **Website**: creatorkit.com (when available)
-- **Twitter**: @creatorkit
-- **LinkedIn**: CreatorKit
-- **Email**: hello@creatorkit.com
+- **Website**: [chowdari.in](https://chowdari.in) 
+- **Twitter**: [@vchaitanyachowadari](https://x.com/vchaitanyachai?s=11)
+- **LinkedIn**: [V Chaitanya Chowdari](https://linkedin.com/vchaitanyachowdari/)
+- **Email**: [vchaitanya@chowdari.in](vchaitanya@chowdari.in)
 
 ---
 
