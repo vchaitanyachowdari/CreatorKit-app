@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import { Plus, Minus } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -86,7 +88,7 @@ export function FAQSection() {
               onClick={() => toggleItem(index)}
               role="button"
               tabIndex={0}
-              onKeyDown={(e) => {
+              onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault()
                   toggleItem(index)
