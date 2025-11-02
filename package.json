@@ -1,12 +1,18 @@
 {
-  "name": "my-v0-project",
+  "name": "creatorkit-app",
   "version": "0.1.0",
   "private": true,
+  "description": "All-in-one AI-powered content creation platform",
+  "license": "MIT",
+  "author": "CreatorKit Team",
   "scripts": {
+    "analyze": "ANALYZE=true next build",
     "build": "next build",
     "dev": "next dev",
-    "lint": "eslint .",
-    "start": "next start"
+    "format": "prettier --write .",
+    "lint": "eslint . --ext .ts,.tsx",
+    "start": "next start",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
@@ -75,5 +81,9 @@
     "tailwindcss": "^4.1.9",
     "tw-animate-css": "1.3.3",
     "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
   }
 }

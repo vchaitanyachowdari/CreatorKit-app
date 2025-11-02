@@ -1,5 +1,7 @@
-import { generateObject } from "ai"
+import { generateContentWithAI } from "@/lib/ai-provider"
 import { z } from "zod"
+import { createErrorResponse } from "@/lib/error-handler"
+import { logger } from "@/lib/logger"
 
 const scriptSchema = z.object({
   title: z.string().describe("The script title"),
@@ -23,24 +25,27 @@ const debugSchema = z.object({
 })
 
 export async function POST(req: Request) {
-  const { toolType, input, scriptType, language } = await req.json()
+  try {
+    const { toolType, input, scriptType, language } = await req.json()
 
-  if (toolType === "script") {
-    const prompt = `Generate a professional ${scriptType} script with the following details:
+    if (toolType === "script") {
+      const prompt = `Generate a professional ${scriptType} script with the following details:
 ${input}
 
 Create a well-paced, engaging script that's ready for delivery. Format it clearly for reading/performance.`
 
-    const { object } = await generateObject({
-      model: "openai/gpt-5-mini",
-      schema: scriptSchema,
-      prompt,
-      system: `You are a professional scriptwriter who creates engaging ${scriptType} scripts for various audiences. Your scripts are clear, paced well, and optimized for delivery.`,
-    })
+      logger.debug("Generating script", { scriptType })
 
-    return Response.json(object)
-  } else {
-    const prompt = `Analyze and debug this ${language} code:
+      const object = await generateContentWithAI(
+        scriptSchema,
+        prompt,
+        `You are a professional scriptwriter who creates engaging ${scriptType} scripts for various audiences. Your scripts are clear, paced well, and optimized for delivery.`,
+      )
+
+      logger.info("Script generated successfully", { scriptType })
+      return Response.json(object)
+    } else {
+      const prompt = `Analyze and debug this ${language} code:
 
 \`\`\`${language}
 ${input}
@@ -48,13 +53,19 @@ ${input}
 
 Identify any errors, security issues, performance problems, and provide optimization suggestions. Include severity levels and actionable fixes.`
 
-    const { object } = await generateObject({
-      model: "openai/gpt-5-mini",
-      schema: debugSchema,
-      prompt,
-      system: `You are an expert code debugger and optimizer. Analyze code carefully for errors, security issues, and performance problems. Provide clear, actionable suggestions for improvement.`,
-    })
+      logger.debug("Analyzing code", { language })
 
-    return Response.json(object)
+      const object = await generateContentWithAI(
+        debugSchema,
+        prompt,
+        `You are an expert code debugger and optimizer. Analyze code carefully for errors, security issues, and performance problems. Provide clear, actionable suggestions for improvement.`,
+      )
+
+      logger.info("Code analysis completed successfully", { language })
+      return Response.json(object)
+    }
+  } catch (error) {
+    logger.error("Error in script/debugger operation", error)
+    return createErrorResponse(error, 500)
   }
 }

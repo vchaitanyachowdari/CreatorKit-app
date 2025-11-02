@@ -1,5 +1,7 @@
-import { generateObject } from "ai"
+import { generateContentWithAI } from "@/lib/ai-provider"
 import { z } from "zod"
+import { createErrorResponse } from "@/lib/error-handler"
+import { logger } from "@/lib/logger"
 
 const pdfSchema = z.object({
   title: z.string().describe("Title or main topic of the PDF"),
@@ -29,39 +31,46 @@ const dataSchema = z.object({
 })
 
 export async function POST(req: Request) {
-  const { toolType, content } = await req.json()
+  try {
+    const { toolType, content } = await req.json()
 
-  if (toolType === "pdf") {
-    const prompt = `Analyze and summarize this document content:
+    if (toolType === "pdf") {
+      const prompt = `Analyze and summarize this document content:
 
 ${content.substring(0, 5000)}
 
 Provide a comprehensive analysis with summary, key points, and metadata.`
 
-    const { object } = await generateObject({
-      model: "openai/gpt-5-mini",
-      schema: pdfSchema,
-      prompt,
-      system:
-        "You are an expert document analyst. Extract key information, summarize content accurately, and identify important insights.",
-    })
+      logger.debug("Analyzing PDF document")
 
-    return Response.json(object)
-  } else {
-    const prompt = `Analyze this data and provide insights:
+      const object = await generateContentWithAI(
+        pdfSchema,
+        prompt,
+        "You are an expert document analyst. Extract key information, summarize content accurately, and identify important insights.",
+      )
+
+      logger.info("PDF analysis completed successfully")
+      return Response.json(object)
+    } else {
+      const prompt = `Analyze this data and provide insights:
 
 ${content.substring(0, 3000)}
 
 Provide statistics, trends, recommendations, and assess data quality.`
 
-    const { object } = await generateObject({
-      model: "openai/gpt-5-mini",
-      schema: dataSchema,
-      prompt,
-      system:
-        "You are a data analyst. Extract statistics, identify trends, provide actionable recommendations, and assess data quality.",
-    })
+      logger.debug("Analyzing data")
 
-    return Response.json(object)
+      const object = await generateContentWithAI(
+        dataSchema,
+        prompt,
+        "You are a data analyst. Extract statistics, identify trends, provide actionable recommendations, and assess data quality.",
+      )
+
+      logger.info("Data analysis completed successfully")
+      return Response.json(object)
+    }
+  } catch (error) {
+    logger.error("Error in PDF/data analysis", error)
+    return createErrorResponse(error, 500)
   }
 }

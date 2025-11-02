@@ -1,5 +1,7 @@
-import { generateObject } from "ai"
+import { generateContentWithAI } from "@/lib/ai-provider"
 import { z } from "zod"
+import { createErrorResponse } from "@/lib/error-handler"
+import { logger } from "@/lib/logger"
 
 const blogSchema = z.object({
   title: z.string().describe("The blog post title"),
@@ -22,20 +24,21 @@ const pressSchema = z.object({
 })
 
 export async function POST(req: Request) {
-  const { contentType, topic, description, keywords, tone } = await req.json()
+  try {
+    const { contentType, topic, description, keywords, tone } = await req.json()
 
-  const isPress = contentType === "press"
-  const schema = isPress ? pressSchema : blogSchema
+    const isPress = contentType === "press"
+    const schema = isPress ? pressSchema : blogSchema
 
-  const prompt = isPress
-    ? `Generate a professional press release with the following details:
+    const prompt = isPress
+      ? `Generate a professional press release with the following details:
 Title: ${topic}
 Details: ${description}
 Key Keywords: ${keywords.join(", ")}
 Tone: ${tone}
 
 Format: Use AP style formatting. Include headline, dateline, and body paragraphs. Include quotes where appropriate.`
-    : `Generate a comprehensive, SEO-optimized blog post with the following details:
+      : `Generate a comprehensive, SEO-optimized blog post with the following details:
 Title: ${topic}
 Description: ${description}
 Keywords: ${keywords.join(", ")}
@@ -43,14 +46,20 @@ Tone: ${tone}
 
 Create a well-structured blog post with an introduction, multiple sections, practical examples, and a conclusion. Optimize for readability and SEO.`
 
-  const { object } = await generateObject({
-    model: "openai/gpt-5-mini",
-    schema,
-    prompt,
-    system: isPress
-      ? "You are a professional PR writer who creates compelling, newsworthy press releases in AP style."
-      : "You are an expert content writer who creates engaging, SEO-optimized blog posts with excellent readability and structure.",
-  })
+    logger.debug("Generating content", { contentType, topic })
 
-  return Response.json(object)
+    const object = await generateContentWithAI(
+      schema,
+      prompt,
+      isPress
+        ? "You are a professional PR writer who creates compelling, newsworthy press releases in AP style."
+        : "You are an expert content writer who creates engaging, SEO-optimized blog posts with excellent readability and structure.",
+    )
+
+    logger.info("Content generated successfully", { contentType })
+    return Response.json(object)
+  } catch (error) {
+    logger.error("Error generating content", error)
+    return createErrorResponse(error, 500)
+  }
 }
