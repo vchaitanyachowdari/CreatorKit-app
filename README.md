@@ -53,23 +53,23 @@
 ### Installation
 
 1. **Clone the repository:**
-   \`\`\`bash
+   ```bash
    git clone https://github.com/yourusername/CreatorKit-app.git
    cd CreatorKit-app
-   \`\`\`
+   ```
 
 2. **Install dependencies:**
-   \`\`\`bash
+   ```bash
    npm install
    # or
    yarn install
    # or
    pnpm install
-   \`\`\`
+   ```
 
 3. **Set up environment variables:**
    Create a `.env.local` file in the root directory:
-   \`\`\`bash
+   ```bash
    # AI Provider (Choose one)
    OPENAI_API_KEY=your_openai_api_key
    # or
@@ -79,16 +79,16 @@
    
    # Optional: Vercel AI Gateway (if using)
    NEXT_PUBLIC_API_URL=http://localhost:3000
-   \`\`\`
+   ```
 
 4. **Run the development server:**
-   \`\`\`bash
+   ```bash
    npm run dev
    # or
    yarn dev
    # or
    pnpm dev
-   \`\`\`
+   ```
 
    Open [http://localhost:3000](http://localhost:3000) in your browser.
 
@@ -96,7 +96,7 @@
 
 ## Project Structure
 
-\`\`\`
+```
 CreatorKit-app/
 ├── app/
 │   ├── api/                          # API routes for backend
@@ -138,7 +138,7 @@ CreatorKit-app/
 ├── tailwind.config.ts                # Tailwind CSS setup
 ├── tsconfig.json                     # TypeScript configuration
 └── package.json                      # Project dependencies
-\`\`\`
+```
 
 ---
 
@@ -159,7 +159,7 @@ After logging in, navigate to `/tools/[tool-name]` to access specific tools:
 
 Each tool has a corresponding API route at `/api/tools/[tool-name]` that accepts POST requests:
 
-\`\`\`bash
+```bash
 curl -X POST http://localhost:3000/api/tools/social-media-generator \
   -H "Content-Type: application/json" \
   -d '{
@@ -167,7 +167,7 @@ curl -X POST http://localhost:3000/api/tools/social-media-generator \
     "platforms": ["twitter", "linkedin"],
     "tone": "professional"
   }'
-\`\`\`
+```
 
 ---
 
@@ -198,25 +198,25 @@ curl -X POST http://localhost:3000/api/tools/social-media-generator \
 ### Optimize the Build
 
 1. **Build the application:**
-   \`\`\`bash
+   ```bash
    npm run build
-   \`\`\`
+   ```
 
 2. **Start the production server:**
-   \`\`\`bash
+   ```bash
    npm run start
-   \`\`\`
+   ```
 
 ### Environment Variables
 
 Ensure all required environment variables are set in your production environment:
 
-\`\`\`bash
+```bash
 # Production environment
 OPENAI_API_KEY=your_production_key
 NEXT_PUBLIC_API_URL=https://yourdomain.com
 NODE_ENV=production
-\`\`\`
+```
 
 ### Performance Tips
 
@@ -234,9 +234,9 @@ NODE_ENV=production
 ### Deploy to Vercel (Recommended)
 
 1. Push your code to GitHub:
-   \`\`\`bash
+   ```bash
    git push origin main
-   \`\`\`
+   ```
 
 2. Connect your repository to Vercel:
    - Go to [vercel.com](https://vercel.com)
@@ -246,15 +246,15 @@ NODE_ENV=production
    - Click "Deploy"
 
 3. Set up CI/CD:
-   \`\`\`bash
+   ```bash
    # Vercel automatically deploys on push to main
    # Preview deployments for pull requests
-   \`\`\`
+   ```
 
 ### Deploy to Other Platforms
 
 **Docker:**
-\`\`\`dockerfile
+```dockerfile
 FROM node:18-alpine
 WORKDIR /app
 COPY package*.json ./
@@ -263,7 +263,7 @@ COPY . .
 RUN npm run build
 EXPOSE 3000
 CMD ["npm", "start"]
-\`\`\`
+```
 
 **Environment Setup:**
 - Database connections (if needed)
@@ -278,7 +278,7 @@ CMD ["npm", "start"]
 ### Endpoints
 
 #### Social Media Post Generator
-\`\`\`
+```
 POST /api/tools/social-media-generator
 Body: {
   topic: string
@@ -294,10 +294,10 @@ Response: {
     }
   }
 }
-\`\`\`
+```
 
 #### Blog & Press Release Generator
-\`\`\`
+```
 POST /api/tools/blog-press-release
 Body: {
   topic: string
@@ -312,10 +312,10 @@ Response: {
     keywords: string[]
   }
 }
-\`\`\`
+```
 
 #### Code Debugger
-\`\`\`
+```
 POST /api/tools/script-debugger
 Body: {
   code: string
@@ -329,7 +329,7 @@ Response: {
     fix: string
   }>
 }
-\`\`\`
+```
 
 ---
 
@@ -378,14 +378,14 @@ Response: {
 
 ### Manual Testing
 
-\`\`\`bash
+```bash
 # Test local development
 npm run dev
 
 # Test production build
 npm run build
 npm run start
-\`\`\`
+```
 
 ### Recommended Testing Tools
 
@@ -407,11 +407,11 @@ npm run start
 
 ### Logging Setup
 
-\`\`\`javascript
+```javascript
 // Example error logging
 console.error('[Error]', error.message, error.stack)
 // Use service like Sentry for production
-\`\`\`
+```
 
 ---
 
@@ -425,12 +425,12 @@ console.error('[Error]', error.message, error.stack)
 - Use request throttling
 
 **Build Errors:**
-\`\`\`bash
+```bash
 # Clear cache and reinstall
 rm -rf .next node_modules
 npm install
 npm run build
-\`\`\`
+```
 
 **Environment Variables Not Loading:**
 - Verify `.env.local` file exists
@@ -515,27 +515,4 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 **Made with ❤️ by the CreatorKit team**
 
 Last Updated: November 2025
-\`\`\`
 
-```text file="LICENSE"
-MIT License
-
-Copyright (c) 2025 CreatorKit Contributors
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
