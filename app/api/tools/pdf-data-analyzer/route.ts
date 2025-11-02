@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server"
 import { generateContentWithAI } from "@/lib/ai-provider"
 import { z } from "zod"
 import { createErrorResponse } from "@/lib/error-handler"
@@ -50,7 +51,7 @@ Provide a comprehensive analysis with summary, key points, and metadata.`
       )
 
       logger.info("PDF analysis completed successfully")
-      return Response.json(object)
+      return NextResponse.json(object)
     } else {
       const prompt = `Analyze this data and provide insights:
 
@@ -67,7 +68,7 @@ Provide statistics, trends, recommendations, and assess data quality.`
       )
 
       logger.info("Data analysis completed successfully")
-      return Response.json(object)
+      return NextResponse.json(object)
     }
   } catch (error) {
     logger.error("Error in PDF/data analysis", error)

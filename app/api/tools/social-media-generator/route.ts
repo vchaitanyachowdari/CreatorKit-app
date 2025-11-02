@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server"
 import { generateContentWithAI } from "@/lib/ai-provider"
 import { z } from "zod"
 import { createErrorResponse } from "@/lib/error-handler"
@@ -59,7 +60,7 @@ Create posts tailored to each platform with appropriate length, style, and hasht
 
     logger.info("Social media posts generated successfully", { platforms: platforms.length })
 
-    return Response.json(object, {
+    return NextResponse.json(object, {
       headers: {
         "Cache-Control": "no-store, no-cache, must-revalidate",
       },

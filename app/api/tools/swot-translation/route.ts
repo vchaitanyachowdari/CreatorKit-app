@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server"
 import { generateContentWithAI } from "@/lib/ai-provider"
 import { z } from "zod"
 import { createErrorResponse } from "@/lib/error-handler"
@@ -39,7 +40,7 @@ Create detailed, actionable insights for each quadrant and provide strategic rec
       )
 
       logger.info("SWOT analysis generated successfully")
-      return Response.json(object)
+      return NextResponse.json(object)
     } else {
       const langMap: Record<string, string> = {
         es: "Spanish",
@@ -71,7 +72,7 @@ Preserve the original meaning and tone while adapting to cultural context.`
       )
 
       logger.info("Translation completed successfully", { targetLanguage })
-      return Response.json({
+      return NextResponse.json({
         ...object,
         targetLanguage: langMap[targetLanguage] || "Unknown",
       })

@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server"
 import { generateContentWithAI } from "@/lib/ai-provider"
 import { z } from "zod"
 import { createErrorResponse } from "@/lib/error-handler"
@@ -43,7 +44,7 @@ Create a well-paced, engaging script that's ready for delivery. Format it clearl
       )
 
       logger.info("Script generated successfully", { scriptType })
-      return Response.json(object)
+      return NextResponse.json(object)
     } else {
       const prompt = `Analyze and debug this ${language} code:
 
@@ -62,7 +63,7 @@ Identify any errors, security issues, performance problems, and provide optimiza
       )
 
       logger.info("Code analysis completed successfully", { language })
-      return Response.json(object)
+      return NextResponse.json(object)
     }
   } catch (error) {
     logger.error("Error in script/debugger operation", error)

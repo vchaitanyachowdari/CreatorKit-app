@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server"
 import { generateContentWithAI } from "@/lib/ai-provider"
 import { z } from "zod"
 import { createErrorResponse } from "@/lib/error-handler"
@@ -39,7 +40,7 @@ Provide the exact regex pattern that matches this requirement. Include test exam
       )
 
       logger.info("Regex pattern generated successfully")
-      return Response.json(object)
+      return NextResponse.json(object)
     } else {
       const prompt = `Create chart data from this description: ${input}
 
@@ -54,7 +55,7 @@ Generate realistic, well-structured data formatted as CSV that can be used to cr
       )
 
       logger.info("Chart data generated successfully", { chartType })
-      return Response.json({
+      return NextResponse.json({
         ...object,
         chartType,
       })

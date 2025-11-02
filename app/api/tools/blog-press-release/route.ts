@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server"
 import { generateContentWithAI } from "@/lib/ai-provider"
 import { z } from "zod"
 import { createErrorResponse } from "@/lib/error-handler"
@@ -57,7 +58,7 @@ Create a well-structured blog post with an introduction, multiple sections, prac
     )
 
     logger.info("Content generated successfully", { contentType })
-    return Response.json(object)
+    return NextResponse.json(object)
   } catch (error) {
     logger.error("Error generating content", error)
     return createErrorResponse(error, 500)
