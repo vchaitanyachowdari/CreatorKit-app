@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { validateEnv } from "@/lib/env"
 import "./globals.css"
+import { Providers } from "@/app/providers"
 
 validateEnv()
 
@@ -67,7 +68,9 @@ html {
           </>
         )}
       </head>
-      <body className="dark">{children}</body>
+      <body className="dark">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   )
 }

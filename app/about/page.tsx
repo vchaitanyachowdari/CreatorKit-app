@@ -1,26 +1,19 @@
 "use client"
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { AppHeader } from "@/components/app-header"
+import { AppFooter } from "@/components/app-footer"
 import { Card } from "@/components/ui/card"
 import { CheckCircle, Users, Award, Zap } from "lucide-react"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
-      <header className="sticky top-4 z-[9999] mx-auto hidden w-full flex-row items-center justify-between self-start rounded-full bg-background/80 md:flex backdrop-blur-sm border border-border/50 shadow-lg max-w-5xl px-4 py-2">
-        <Link href="/" className="z-50 flex items-center justify-center gap-2 font-bold text-lg">
-          CreatorKit
-        </Link>
-        <div className="flex items-center gap-4">
-          <Link href="/" className="font-medium transition-colors hover:text-foreground text-muted-foreground text-sm">
-            Back to Home
-          </Link>
-        </div>
-      </header>
+      <AppHeader showAuth={true} />
 
-      <div className="max-w-4xl mx-auto px-4 py-20">
+      <div className="flex-1 max-w-4xl mx-auto px-4 py-20 w-full">
         {/* Hero Section */}
         <div className="text-center space-y-6 mb-16">
           <h1 className="text-4xl md:text-5xl font-bold">About CreatorKit</h1>
@@ -136,6 +129,9 @@ export default function AboutPage() {
           </Link>
         </Card>
       </div>
+
+      {/* Footer */}
+      <AppFooter />
     </div>
   )
 }

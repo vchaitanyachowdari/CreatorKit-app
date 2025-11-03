@@ -1,9 +1,9 @@
 "use client"
 
 import type React from "react"
-
-import Link from "next/link"
 import { useState } from "react"
+import { AppHeader } from "@/components/app-header"
+import { AppFooter } from "@/components/app-footer"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -23,7 +23,6 @@ export default function ContactPage() {
     e.preventDefault()
     setIsSubmitting(true)
     try {
-      // Simulated form submission - replace with actual API call
       await new Promise((resolve) => setTimeout(resolve, 1000))
       setSubmitStatus("success")
       setFormData({ name: "", email: "", subject: "", message: "" })
@@ -37,20 +36,11 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
-      <header className="sticky top-4 z-[9999] mx-auto hidden w-full flex-row items-center justify-between self-start rounded-full bg-background/80 md:flex backdrop-blur-sm border border-border/50 shadow-lg max-w-5xl px-4 py-2">
-        <Link href="/" className="z-50 flex items-center justify-center gap-2 font-bold text-lg">
-          CreatorKit
-        </Link>
-        <div className="flex items-center gap-4">
-          <Link href="/" className="font-medium transition-colors hover:text-foreground text-muted-foreground text-sm">
-            Back to Home
-          </Link>
-        </div>
-      </header>
+      <AppHeader showAuth={true} />
 
-      <div className="max-w-6xl mx-auto px-4 py-20">
+      <div className="flex-1 max-w-6xl mx-auto px-4 py-20 w-full">
         {/* Hero Section */}
         <div className="text-center space-y-6 mb-16">
           <h1 className="text-4xl md:text-5xl font-bold">Get in Touch</h1>
@@ -204,6 +194,9 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <AppFooter />
     </div>
   )
 }
