@@ -3,9 +3,9 @@
 import type React from "react"
 
 import { useTheme } from "next-themes"
-import Earth from "./ui/globe"
-import ScrambleHover from "./ui/scramble"
-import { FollowerPointerCard } from "./ui/following-pointer"
+import Earth from "@/components/ui/globe"
+import ScrambleHover from "@/components/ui/scramble"
+import { FollowerPointerCard } from "@/components/ui/following-pointer"
 import { motion, useInView } from "framer-motion"
 import { Suspense, useEffect, useRef, useState } from "react"
 import { geist } from "@/lib/fonts"
