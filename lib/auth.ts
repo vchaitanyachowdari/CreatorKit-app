@@ -2,6 +2,10 @@ import type { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 
+if (!process.env.NEXTAUTH_SECRET) {
+  console.error("[v0] NEXTAUTH_SECRET is not set. Auth will not work properly.")
+}
+
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -11,7 +15,6 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        // For now, accepting any email/password combination for demo
         if (!credentials?.email || !credentials?.password) {
           return null
         }
@@ -27,10 +30,14 @@ export const authOptions: NextAuthOptions = {
         return user
       },
     }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-    }),
+    ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+      ? [
+          GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+          }),
+        ]
+      : []),
   ],
   pages: {
     signIn: "/login",
@@ -41,7 +48,9 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   jwt: {
-    secret: process.env.NEXTAUTH_SECRET,
+    secret:
+      process.env.NEXTAUTH_SECRET ||
+      (process.env.NODE_ENV === "development" ? "dev-secret-key-change-in-production" : undefined),
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   callbacks: {
@@ -61,12 +70,17 @@ export const authOptions: NextAuthOptions = {
       return session
     },
   },
-  events: {
-    async signIn() {
-      console.log("[v0] User signed in")
+  logger: {
+    error: (code, ...message) => {
+      console.error("[v0] NextAuth Error:", code, ...message)
     },
-    async signOut() {
-      console.log("[v0] User signed out")
+    warn: (code, ...message) => {
+      console.warn("[v0] NextAuth Warning:", code, ...message)
+    },
+    debug: (code, ...message) => {
+      if (process.env.DEBUG) {
+        console.log("[v0] NextAuth Debug:", code, ...message)
+      }
     },
   },
 }
